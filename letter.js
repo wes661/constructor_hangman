@@ -1,3 +1,5 @@
+
+
 var Letter = function(letter){
     this.letter = letter;
     this.show = false;
@@ -5,9 +7,9 @@ var Letter = function(letter){
     this.showLetter = function(){
         if(this.letter == ' ' ){
             this.show = true;
-            return ' ';
+            return '  ';
         }
-        else if(this.show === false){
+        if(this.show === false){
             return ' _ ';
         }
         else{ 
@@ -16,6 +18,7 @@ var Letter = function(letter){
     };
 
 };
+
 
 
 
