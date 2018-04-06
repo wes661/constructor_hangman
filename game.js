@@ -1,5 +1,5 @@
 var hangman = {
-    gameWords: ["Claymore", "Trident", "Dagger", "Flail", "Morning star", "Battle axe", "Katana", "War hammer", "Composite bow", "Long sword"]
+    gameWords: ["CLAYMORE", "TRIDENT", "DAGGER", "FLAIL", "MORNING STAR", "BATTLE AXE", "KATANA", "WAR HAMMER", "CROSS BOW", "BROAD SWORD"]
 };
 
 module.exports = hangman;

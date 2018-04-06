@@ -13,7 +13,7 @@ var Letter = function(letter){
             return ' _ ';
         }
         else{ 
-            return this.letter;
+            return ' ' + this.letter + ' ';
         }
     };
 

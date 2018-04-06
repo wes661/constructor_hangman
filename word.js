@@ -1,6 +1,5 @@
-var inquirer = require('inquirer');
+
 var Letter = require('./letter.js');
-var hangman = require('./game.js');
 
 var Word = function(word){
     this.word = word;
@@ -22,33 +21,15 @@ var Word = function(word){
           display += currentLetter;
         });
     
-        console.log(display);
+        console.log("\n" + display + "\n");
       };
     
 }
 
-var randWord = hangman.gameWords[Math.floor(Math.random() * hangman.gameWords.length)];
-var newWord = new Word(randWord);
 
 
-// console.log(newWord.word);
-// console.log(newWord.letters);
+module.exports = Word;
 
-newWord.addLetters();
-newWord.showWord();
-// guessLetter();
-
-// function guessLetter(){
-//     inquirer.prompt({
-//         type: 'input',
-//         message: 'guess a letter',
-//         name: 'selected'
-//     }).then(function(data){
-//        console.log(newWord.word);
-//        console.log(newWord.letters);
-//        //guessLetter();
-//     })
-// } 
 
     
 
