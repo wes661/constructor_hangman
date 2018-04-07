@@ -4,12 +4,14 @@ var Letter = require('./letter.js');
 var Word = function(word){
     this.word = word;
     this.letters = [];
+    this.testLetters = [];
     this.letterFound = false;
 
     this.addLetters = function() {
         for(var i = 0; i < this.word.length; i++){
           var newLetter = new Letter(this.word[i]);
           this.letters.push(newLetter);
+          this.testLetters.push(newLetter.letter);
         }
     };
 
@@ -23,7 +25,6 @@ var Word = function(word){
     
         console.log("\n" + display + "\n");
       };
-    
 }
 
 
