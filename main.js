@@ -3,18 +3,17 @@ var Word = require('./word.js');
 var hangman = require('./game.js');
 var guessesLeft = 8;
 var correctLetters = [];
-var checkLetter = [];
+var guessedLetters = [];
 var wins = 0;
 var losses = 0;
-var spaceArray = [];
-
 var randWord = hangman.gameWords[Math.floor(Math.random() * hangman.gameWords.length)];
 var newWord = new Word(randWord);
 
-console.log(newWord.word);
-newWord.addLetters();
+getNewWord();
 newWord.showWord();
 playGame();
+
+
 
 function playGame(){
     console.log("\nGuesses left: " + guessesLeft + " Wins: " + wins + " Losses: " + losses);
@@ -26,7 +25,7 @@ function playGame(){
       newWord.testLetters = newWord.testLetters.filter(emptyElement);
       newWord.testLetters.sort();
       console.log(newWord.testLetters);
-        // console.log("Guessed: " + guessedLetters.join());
+        // console.log("Guessed: " + guessedLetters);
       if(newWord.letters.indexOf(data.selected)){
         for(i = 0; i < newWord.letters.length; i++){
           if(newWord.letters[i].letter.toUpperCase() == data.selected.toUpperCase()){
@@ -36,17 +35,16 @@ function playGame(){
             console.log(correctLetters);
           }
         }
-        
         if(correctLetters.toString() == newWord.testLetters.toString()){
           wins++;
-          console.log("You Win!")
+          console.log("\nYou Win!")
+          getNewWord();
+          correctLetters = [];
         }
       }
-      
       newWord.showWord();
        
-       
-       playGame();
+      playGame();
     })
 } 
 
@@ -56,4 +54,11 @@ function emptyElement(element){
   }else{
     return true;
   }
+}
+
+function getNewWord(){
+  randWord = hangman.gameWords[Math.floor(Math.random() * hangman.gameWords.length)];
+  newWord = new Word(randWord);
+  console.log(newWord.word);
+  newWord.addLetters();
 }
