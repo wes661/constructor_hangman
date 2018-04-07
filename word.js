@@ -4,14 +4,14 @@ var Letter = require('./letter.js');
 var Word = function(word){
     this.word = word;
     this.letters = [];
-    this.testLetters = [];
+    this.gameLetters = [];
     this.letterFound = false;
 
     this.addLetters = function() {
         for(var i = 0; i < this.word.length; i++){
           var newLetter = new Letter(this.word[i]);
           this.letters.push(newLetter);
-          this.testLetters.push(newLetter.letter);
+          this.gameLetters.push(newLetter.letter.toLowerCase());
         }
     };
 
@@ -25,6 +25,18 @@ var Word = function(word){
     
         console.log("\n" + display + "\n");
       };
+
+      this.guessWord = function(){
+        for(i = 0; i < newWord.letters.length; i++){
+          if(newWord.letters[i].letter.toLowerCase() == data.selected.toLowerCase()){
+            newWord.letters[i].show = true;
+            correctLetters.push(data.selected);
+            correctLetters.sort();
+            console.log(correctLetters);
+          }
+        }
+      }
+      
 }
 
 

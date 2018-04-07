@@ -22,20 +22,20 @@ function playGame(){
         message: 'guess a letter',
         name: 'selected'
     }).then(function(data){
-      newWord.testLetters = newWord.testLetters.filter(emptyElement);
-      newWord.testLetters.sort();
-      console.log(newWord.testLetters);
+      newWord.gameLetters = newWord.gameLetters.filter(emptyElement);
+      newWord.gameLetters.sort();
+      console.log(newWord.gameLetters);
         // console.log("Guessed: " + guessedLetters);
       if(newWord.letters.indexOf(data.selected)){
         for(i = 0; i < newWord.letters.length; i++){
-          if(newWord.letters[i].letter.toUpperCase() == data.selected.toUpperCase()){
+          if(newWord.letters[i].letter.toLowerCase() == data.selected.toLowerCase()){
             newWord.letters[i].show = true;
             correctLetters.push(data.selected);
             correctLetters.sort();
             console.log(correctLetters);
           }
         }
-        if(correctLetters.toString() == newWord.testLetters.toString()){
+        if(correctLetters.toString() == newWord.gameLetters.toString()){
           wins++;
           console.log("\nYou Win!")
           getNewWord();
