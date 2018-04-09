@@ -1,7 +1,7 @@
 var inquirer = require('inquirer');
 var Word = require('./word.js');
 var hangman = require('./game.js');
-var guessesLeft = 8;
+var guessesLeft = 6;
 var correctLetters = [];
 var guessedLetters = [];
 var wins = 0;
@@ -13,10 +13,9 @@ getNewWord();
 newWord.showWord();
 playGame();
 
-
-
 function playGame(){
-    console.log("\nGuesses left: " + guessesLeft + " Wins: " + wins + " Losses: " + losses);
+    console.log("\nGuesses left: " + guessesLeft + " Wins: " + wins + " Losses: " + losses + "\nGuessed Letters: " + guessedLetters + "\n");
+    
     inquirer.prompt({
         type: 'input',
         message: 'guess a letter',
@@ -24,27 +23,46 @@ function playGame(){
     }).then(function(data){
       newWord.gameLetters = newWord.gameLetters.filter(emptyElement);
       newWord.gameLetters.sort();
-      console.log(newWord.gameLetters);
-        // console.log("Guessed: " + guessedLetters);
-      if(newWord.letters.indexOf(data.selected)){
+
+      if(guessedLetters.indexOf(data.selected) > -1){
+        console.log("You guessed that letter already!");
+        newWord.showWord();
+        playGame();
+      }
+      else if(newWord.gameLetters.indexOf(data.selected) == -1){
+        console.log("Incorrect, guess again!");
+        guessesLeft--;
+        if(guessesLeft == 0){
+          console.log("You lose!")
+          playAgain();
+        }else
+        guessedLetters.push(data.selected);
+        newWord.showWord();
+        playGame();
+        
+      } 
+      else if(newWord.gameLetters.indexOf(data.selected) >= 0 ){
         for(i = 0; i < newWord.letters.length; i++){
-          if(newWord.letters[i].letter.toLowerCase() == data.selected.toLowerCase()){
+          if(newWord.letters[i].letter.toLowerCase() == data.selected){
             newWord.letters[i].show = true;
-            correctLetters.push(data.selected);
+            correctLetters.push(data.selected.toLowerCase());
             correctLetters.sort();
-            console.log(correctLetters);
+            guessedLetters.push(data.selected);
           }
         }
-        if(correctLetters.toString() == newWord.gameLetters.toString()){
-          wins++;
-          console.log("\nYou Win!")
-          getNewWord();
-          correctLetters = [];
-        }
+        newWord.showWord();
+        playGame();
       }
-      newWord.showWord();
-       
-      playGame();
+      if(correctLetters.toString() == newWord.gameLetters.toString()){
+        wins++;
+        console.log("\nYou Win!")
+        getNewWord();
+        guessesLeft = 6;
+        correctLetters = [];
+        guessedLetters = [];
+        newWord.showWord();
+        playGame();
+      } 
     })
 } 
 
@@ -59,6 +77,23 @@ function emptyElement(element){
 function getNewWord(){
   randWord = hangman.gameWords[Math.floor(Math.random() * hangman.gameWords.length)];
   newWord = new Word(randWord);
-  console.log(newWord.word);
   newWord.addLetters();
 }
+function playAgain(){
+  inquirer.prompt({
+    type: "confirm",
+    message: "Would you like to play again?",
+    name: "answer"
+  }).then(function(data){
+    if(data.answer === true ){
+      guessesLeft = 6;
+      correctLetters = [];
+      guessedLetters = [];
+      getNewWord();
+      newWord.showWord();
+      playGame();
+    }else{
+      console.log("Thanks for playing!");
+    }
+  })
+}  

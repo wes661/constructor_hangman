@@ -26,17 +26,6 @@ var Word = function(word){
         console.log("\n" + display + "\n");
       };
 
-      this.guessWord = function(){
-        for(i = 0; i < newWord.letters.length; i++){
-          if(newWord.letters[i].letter.toLowerCase() == data.selected.toLowerCase()){
-            newWord.letters[i].show = true;
-            correctLetters.push(data.selected);
-            correctLetters.sort();
-            console.log(correctLetters);
-          }
-        }
-      }
-      
 }
 
 
