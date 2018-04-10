@@ -38,7 +38,7 @@ function playGame(){
         guessesLeft--;
         if(guessesLeft == 0){
           losses++;
-          console.log("\nYOU LOSE!\n".red)
+          console.log("\nYOU LOSE!\n".red + "You couldn't guess " +(colors.red(newWord.word)) + "!\n");
           playAgain();
         }else{
         guessedLetters.push(data.selected);
@@ -72,7 +72,10 @@ function emptyElement(element){
 function checkWin(){
   if(correctLetters.toString() === newWord.gameLetters.toString()){
     wins++;
-    console.log("\nYOU WIN!".green)
+    console.log("\nYOU WIN!\n".green + "You guessed "  + (colors.green(newWord.word)) + "!\n");
+    for(var i = hangman.gameWords.length -1; i--;){
+      if (hangman.gameWords[i] === randWord) hangman.gameWords.splice(i, 1);
+    }
     playAgain();
   }
   else{
