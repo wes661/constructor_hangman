@@ -76,6 +76,7 @@ function checkWin(){
     for(var i = hangman.gameWords.length -1; i--;){
       if (hangman.gameWords[i] === randWord) hangman.gameWords.splice(i, 1);
     }
+    console.log(hangman.gameWords);
     playAgain();
   }
   else{
