@@ -3,6 +3,22 @@
 
 ### Overview
 
+-You must download and install Nodejs @ https://nodejs.org/en/
+
+-Run "npm install" in the terminal in the constructor_hangman directory to aquire proper packages to use this app
+
+-It's dependencies include the following packages:
+
+    "colors": "^1.2.1",
+
+    "inquirer": "^5.2.0"
+
+-Make sure you're in the constructor_hangman directory and open main.js in the terminal
+
+-Type in the terminal "node main.js" to run the app
+
+-Follow the prompts to play game and enjoy!
+
 This homework assignment is **optional**.
 
 In this week's assignment, you will create a hangman command-line game using constructor functions.
