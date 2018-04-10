@@ -1,5 +1,5 @@
 
-
+//Letter constructor for the letters within the random word
 var Letter = function(letter){
     this.letter = letter;
     this.show = false;

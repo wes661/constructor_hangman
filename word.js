@@ -1,6 +1,7 @@
 
 var Letter = require('./letter.js');
 
+//Word constructor using letter.js adds letters to create word and displays blanks or displays letter if user guessed correctly
 var Word = function(word){
     this.word = word;
     this.letters = [];
