@@ -12,9 +12,20 @@ var randWord = hangman.gameWords[Math.floor(Math.random() * hangman.gameWords.le
 var newWord = new Word(randWord);
 
 //Functions to get a word and display blanks then start playing
-getNewWord();
-newWord.showWord();
-playGame();
+inquirer.prompt({
+  type: "list",
+  message: "Live by the sword, die by the sword. Will you take the challenge?\n".blue,
+  name: "choice",
+  choices: ["YES".green, "NO".red] 
+}).then(function(data){
+  if(data.choice === "YES".green){
+    getNewWord();
+    newWord.showWord();
+    playGame();
+  }else{
+    console.log("\nYou do not have what it takes...\n".red);
+  }  
+})  
 
 //Main game function that holds the logic to play
 function playGame(){
@@ -73,11 +84,15 @@ function checkWin(){
   if(correctLetters.toString() === newWord.gameLetters.toString()){
     wins++;
     console.log("\nYOU WIN!\n".green + "You guessed "  + (colors.green(newWord.word)) + "!\n");
-    for(var i = hangman.gameWords.length -1; i--;){
+    for(var i = 0; i < hangman.gameWords.length; i++){
       if (hangman.gameWords[i] === randWord) hangman.gameWords.splice(i, 1);
     }
-    console.log(hangman.gameWords);
-    playAgain();
+    if(hangman.gameWords.length === 0){
+      console.log("\nYOU ARE A MASTER SWORDSMAN!\n".green);
+    }else{
+      playAgain();
+    }
+    
   }
   else{
     newWord.showWord();
@@ -107,7 +122,7 @@ function playAgain(){
       newWord.showWord();
       playGame();
     }else{
-      console.log("\nThanks for playing!\n".america);
+      console.log("\nYou do not have what it takes...\n".red);
     }
   })
 }  
